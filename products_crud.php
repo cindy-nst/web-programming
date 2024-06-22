@@ -18,11 +18,14 @@ catch(PDOException $e){
 if (isset($_POST['create'])) {
 
   try {
+    $temp = explode(".", $_FILES["productimage"]["name"]);
+    $productimage = $pid . '.' . end($temp);
+    move_uploaded_file($_FILES["productimage"]["tmp_name"], "products/" . $productimage);
 
     $stmt = $conn->prepare("INSERT INTO tbl_products_a192212_pt2(fld_product_id,
       fld_product_name, fld_price, fld_brand, fld_category,
-      fld_quantity, fld_expiry_date) VALUES(:pid, :name, :price, :brand,
-      :category, :quantity, :expirydate)");
+      fld_quantity, fld_expiry_date, fld_image) VALUES(:pid, :name, :price, :brand,
+      :category, :quantity, :expirydate, :productimage)");
 
     $stmt->bindParam(':pid', $pid, PDO::PARAM_STR);
     $stmt->bindParam(':name', $name, PDO::PARAM_STR);
@@ -31,6 +34,7 @@ if (isset($_POST['create'])) {
     $stmt->bindParam(':category', $category, PDO::PARAM_STR);
     $stmt->bindParam(':quantity', $quantity, PDO::PARAM_INT);
     $stmt->bindParam(':expirydate', $expirydate, PDO::PARAM_STR);
+    $stmt->bindParam(':productimage', $productimage, PDO::PARAM_STR);
 
     $pid = $_POST['pid'];
     $name = $_POST['name'];

@@ -85,6 +85,12 @@ include_once 'products_crud.php';
             </div>
           </div>
           <div class="form-group">
+            <label for="productimage" class="col-sm-3 control-label">Product Image</label>
+            <div class="col-sm-9">
+              <input name="productimage" type="file" class="form-control" id="productimage" accept=".jpeg, .jpg, .png" required>
+            </div>
+          </div>
+          <div class="form-group">
             <div class="col-sm-offset-3 col-sm-9">
               <?php if (isset($_GET['edit'])) { ?>
                 <input type="hidden" name="oldpid" value="<?php echo $editrow['fld_product_id']; ?>">
