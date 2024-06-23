@@ -39,15 +39,17 @@ include_once 'database.php';
 
     <div class="container-fluid">
       <div class="row">
-        <div class="col-xs-12 col-sm-5 col-sm-offset-1 col-md-4 col-md-offset-2 well well-sm text-center">
+        <div class="col-xs-12 col-sm-12 col-md-12 well well-sm text-center">
           <?php if ($readrow['fld_image'] == "" ) {
             echo "No image";
           }
           else { ?>
-            <img src="products/<?php echo $readrow['fld_image'] ?>" class="img-responsive">
+            <img src="products/<?php echo $readrow['fld_image'] ?>" class="img-responsive center-block">
           <?php } ?>
         </div>
-        <div class="col-xs-12 col-sm-5 col-md-4">
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
           <div class="panel panel-default">
             <div class="panel-heading"><strong>Product Details</strong></div>
             <div class="panel-body">
