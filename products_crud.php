@@ -81,6 +81,8 @@ if (isset($_POST['update'])) {
     $expirydate = $_POST['expirydate'];
     $oldpid = $_POST['oldpid'];
 
+    unlink("products/" . $oldpid . "jpg");
+
     $stmt->execute();
 
     header("Location: products.php");

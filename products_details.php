@@ -21,8 +21,6 @@ include_once 'database.php';
     <![endif]-->
   </head>
   <body>
-
-    <?php include_once 'nav_bar.php'; ?>
     <?php
     try {
       $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
