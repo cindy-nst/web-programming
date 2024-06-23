@@ -110,7 +110,7 @@ include_once 'products_crud.php';
       <div class="page-header">
         <h2>Products List</h2>
       </div>
-      <table class="table table-striped table-bordered" id="products">
+      <table class="table table-striped table-bordered" id="products" style="width:100%">
         <thead>
           <tr>
             <th>Product ID</th>
