@@ -25,7 +25,7 @@ if (isset($_POST['create'])) {
     $category = $_POST['category'];
     $quantity = $_POST['quantity'];
     $expirydate = $_POST['expirydate'];
-    $temp = explode(".", $_FILES["pimage"]["name"]);
+    $temp = explode(".", $_FILES['pimage']['name']);
     $pimage = $pid . '.' . end($temp);
 
     $stmt = $conn->prepare("INSERT INTO tbl_products_a192212_pt2(fld_product_id,
@@ -44,7 +44,7 @@ if (isset($_POST['create'])) {
 
     $stmt->execute();
     
-    move_uploaded_file($_FILES["pimage"]["tmp_name"], "products/" . $pimage);
+    move_uploaded_file($_FILES['pimage']['tmp_name'], "products/" . $pimage);
   }
   catch(PDOException $e)
   {
@@ -65,8 +65,8 @@ if (isset($_POST['update'])) {
     $expirydate = $_POST['expirydate'];
     $oldpid = $_POST['oldpid'];
 
-    if (!empty($_FILES["pimage"]["name"])) { 
-      $temp = explode(".", $_FILES["pimage"]["name"]);
+    if (!empty($_FILES['pimage']['name'])) { 
+      $temp = explode(".", $_FILES['pimage']['name']);
       $pimage = $pid . '.' . end($temp);
       echo $pimage;
 
@@ -94,7 +94,7 @@ if (isset($_POST['update'])) {
     $stmt->execute();
     
     unlink("products/" . $oldpid . "png");
-    move_uploaded_file($_FILES["pimage"]["tmp_name"], "products/" . $pimage);
+    move_uploaded_file($_FILES['pimage']['tmp_name'], "products/" . $pimage);
 
     header("Location: products.php");
   }

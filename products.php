@@ -87,7 +87,7 @@ include_once 'products_crud.php';
           <div class="form-group">
             <label for="pimage" class="col-sm-3 control-label">Product Image</label>
             <div class="col-sm-9">
-              <input name="pimage" type="file" class="form-control" id="pimage" accept=".png" required>
+              <input name="pimage" type="file" class="form-control" id="pimage" accept=".png">
             </div>
           </div>
           <div class="form-group">
@@ -96,7 +96,7 @@ include_once 'products_crud.php';
                 <input type="hidden" name="oldpid" value="<?php echo $editrow['fld_product_id']; ?>">
                 <button class="btn btn-default" type="submit" name="update"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Update</button>
               <?php } else { ?>
-                <button class="btn btn-default" type="submit" name="create"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create</button>
+                <button class="btn btn-default" type="submit" id="createbtn" name="create"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create</button>
               <?php } ?>
               <button class="btn btn-default" type="reset"><span class="glyphicon glyphicon-erase" aria-hidden="true"></span> Clear</button>
             </div>
@@ -189,6 +189,11 @@ include_once 'products_crud.php';
   <script src="js/datatables.min.js"></script>
 
   <script type="text/javascript">
+    // To validate image upload is required when create new product
+    $("#createbtn").click(function(event) { 
+      $('#pimage').prop('required', true); 
+    }); 
+
     $(document).ready(function() {
       $('.openPopup').on('click',function() {
         var dataURL = $(this).attr('data-href');
