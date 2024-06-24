@@ -18,14 +18,11 @@ catch(PDOException $e){
 if (isset($_POST['create'])) {
 
   try {
-    $temp = explode(".", $_FILES["productimage"]["name"]);
-    $productimage = $pid . '.' . end($temp);
-    move_uploaded_file($_FILES["productimage"]["tmp_name"], "products/" . $productimage);
 
     $stmt = $conn->prepare("INSERT INTO tbl_products_a192212_pt2(fld_product_id,
       fld_product_name, fld_price, fld_brand, fld_category,
       fld_quantity, fld_expiry_date, fld_image) VALUES(:pid, :name, :price, :brand,
-      :category, :quantity, :expirydate, :productimage)");
+      :category, :quantity, :expirydate, :pimage)");
 
     $stmt->bindParam(':pid', $pid, PDO::PARAM_STR);
     $stmt->bindParam(':name', $name, PDO::PARAM_STR);
@@ -34,7 +31,7 @@ if (isset($_POST['create'])) {
     $stmt->bindParam(':category', $category, PDO::PARAM_STR);
     $stmt->bindParam(':quantity', $quantity, PDO::PARAM_INT);
     $stmt->bindParam(':expirydate', $expirydate, PDO::PARAM_STR);
-    $stmt->bindParam(':productimage', $productimage, PDO::PARAM_STR);
+    $stmt->bindParam(':pimage', $pimage, PDO::PARAM_STR);
 
     $pid = $_POST['pid'];
     $name = $_POST['name'];
@@ -43,10 +40,14 @@ if (isset($_POST['create'])) {
     $category = $_POST['category'];
     $quantity = $_POST['quantity'];
     $expirydate = $_POST['expirydate'];
+    $pimage = $_POST['pimage'];
+
+    $temp = explode(".", $_FILES["pimage"]["name"]);
+    $pimage = $pid . '.' . end($temp);
+    move_uploaded_file($_FILES["pimage"]["tmp_name"], "products/" . $pimage);
 
     $stmt->execute();
   }
-
   catch(PDOException $e)
   {
     echo "Error: " . $e->getMessage();
@@ -71,6 +72,7 @@ if (isset($_POST['update'])) {
     $stmt->bindParam(':quantity', $quantity, PDO::PARAM_INT);
     $stmt->bindParam(':expirydate', $expirydate, PDO::PARAM_STR);
     $stmt->bindParam(':oldpid', $oldpid, PDO::PARAM_STR);
+    $stmt->bindParam(':pimage', $pimage, PDO::PARAM_STR);
 
     $pid = $_POST['pid'];
     $name = $_POST['name'];
@@ -80,14 +82,20 @@ if (isset($_POST['update'])) {
     $quantity = $_POST['quantity'];
     $expirydate = $_POST['expirydate'];
     $oldpid = $_POST['oldpid'];
+    $pimage = $_POST['pimage'];
 
-    unlink("products/" . $oldpid . "jpg");
-
+    if (!empty($pimage)) {
+      unlink("products/" . $oldpid . "png");
+      
+      $temp = explode(".", $_FILES["pimage"]["name"]);
+      $pimage = $pid . '.' . end($temp);
+      move_uploaded_file($_FILES["pimage"]["tmp_name"], "products/" . $pimage);
+    }
+    
     $stmt->execute();
 
     header("Location: products.php");
   }
-
   catch(PDOException $e)
   {
     echo "Error: " . $e->getMessage();
@@ -109,7 +117,6 @@ if (isset($_GET['delete'])) {
 
     header("Location: products.php");
   }
-
   catch(PDOException $e)
   {
     echo "Error: " . $e->getMessage();
@@ -131,7 +138,6 @@ if (isset($_GET['edit'])) {
 
     $editrow = $stmt->fetch(PDO::FETCH_ASSOC);
   }
-
   catch(PDOException $e)
   {
     echo "Error: " . $e->getMessage();

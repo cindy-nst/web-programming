@@ -31,135 +31,136 @@ include_once 'products_crud.php';
           <h2>Create New Product</h2>
         </div>
 
-        <form action="products.php" method="post" class="form-horizontal">
+        <form action="products.php" method="post" class="form-horizontal" enctype="multipart/form-data">
           <div class="form-group">
-           <label for="productid" class="col-sm-3 control-label">Product ID</label>
-           <div class="col-sm-9">
-            <input name="pid" type="text" class="form-control" id="productid" placeholder="Product ID" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_product_id']; ?>" required>
+            <label for="productid" class="col-sm-3 control-label">Product ID</label>
+            <div class="col-sm-9">
+              <input name="pid" type="text" class="form-control" id="productid" placeholder="Product ID" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_product_id']; ?>" required>
+            </div>
           </div>
-        </div>
-        <div class="form-group">
-          <label for="productname" class="col-sm-3 control-label">Name</label>
-          <div class="col-sm-9">
-            <input name="name" type="text" class="form-control" id="productname"placeholder="Product Name" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_product_name']; ?>" required>
+          <div class="form-group">
+            <label for="productname" class="col-sm-3 control-label">Name</label>
+            <div class="col-sm-9">
+              <input name="name" type="text" class="form-control" id="productname"placeholder="Product Name" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_product_name']; ?>" required>
+            </div>
           </div>
-        </div>
-        <div class="form-group">
-          <label for="productprice" class="col-sm-3 control-label">Price</label>
-          <div class="col-sm-9">
-            <input name="price" type="text" class="form-control" id="productprice" placeholder="Product Price" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_price']; ?>" required>
+          <div class="form-group">
+            <label for="productprice" class="col-sm-3 control-label">Price</label>
+            <div class="col-sm-9">
+              <input name="price" type="text" class="form-control" id="productprice" placeholder="Product Price" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_price']; ?>" required>
+            </div>
           </div>
-        </div>
-        <div class="form-group">
-          <label for="productbrand" class="col-sm-3 control-label">Brand</label>
-          <div class="col-sm-9">
-            <input name="brand" type="text" class="form-control" id="productbrand" placeholder="Product Brand" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_brand']; ?>" required>
+          <div class="form-group">
+            <label for="productbrand" class="col-sm-3 control-label">Brand</label>
+            <div class="col-sm-9">
+              <input name="brand" type="text" class="form-control" id="productbrand" placeholder="Product Brand" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_brand']; ?>" required>
+            </div>
           </div>
-        </div>
-        <div class="form-group">
-          <label for="category" class="col-sm-3 control-label">Category</label>
-          <div class="col-sm-9">
-            <select name="category" class="form-control" id="category" required>
-              <?php
-              foreach($resultcategory as $readrow){
-                $categoryname= $readrow["fld_category"];
-                ?>
-                <option value="<?php echo $categoryname; ?>" <?php if(isset($_GET['edit'])) if($editrow['fld_category']=="<?php echo $categoryname; ?>") echo "selected"; ?>><?php echo $categoryname; ?></option>
+          <div class="form-group">
+            <label for="category" class="col-sm-3 control-label">Category</label>
+            <div class="col-sm-9">
+              <select name="category" class="form-control" id="category" required>
                 <?php
-              }
-              $conn = null;
-              ?>
-            </select>
+                foreach($resultcategory as $readrow){
+                  $categoryname= $readrow["fld_category"];
+                  ?>
+                  <option value="<?php echo $categoryname; ?>" <?php if(isset($_GET['edit'])) if($editrow['fld_category']=="<?php echo $categoryname; ?>") echo "selected"; ?>><?php echo $categoryname; ?></option>
+                  <?php
+                }
+                $conn = null;
+                ?>
+              </select>
+            </div>
+          </div>  
+          <div class="form-group">
+            <label for="expirydate" class="col-sm-3 control-label">Expiry Date</label>
+            <div class="col-sm-9">
+              <input type="date" id="expirydate" name="expirydate" class="form-control" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_expiry_date']; ?>" required>
+            </div>
+          </div>  
+          <div class="form-group">
+            <label for="quantity" class="col-sm-3 control-label">Quantity</label>
+            <div class="col-sm-9">
+              <input name="quantity" type="number" min=1 class="form-control" id="quantity" placeholder="Product Quantity"  value="<?php if(isset($_GET['edit'])) echo $editrow['fld_quantity']; ?>" required> 
+            </div>
           </div>
-        </div>  
-        <div class="form-group">
-          <label for="expirydate" class="col-sm-3 control-label">Expiry Date</label>
-          <div class="col-sm-9">
-            <input type="date" id="expirydate" name="expirydate" class="form-control" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_expiry_date']; ?>" required>
+          <div class="form-group">
+            <label for="pimage" class="col-sm-3 control-label">Product Image</label>
+            <div class="col-sm-9">
+              <input name="pimage" type="file" class="form-control" id="pimage" accept=".png" required>
+            </div>
           </div>
-        </div>  
-        <div class="form-group">
-          <label for="quantity" class="col-sm-3 control-label">Quantity</label>
-          <div class="col-sm-9">
-            <input name="quantity" type="number" min=1 class="form-control" id="quantity" placeholder="Product Quantity"  value="<?php if(isset($_GET['edit'])) echo $editrow['fld_quantity']; ?>" required> 
+          <div class="form-group">
+            <div class="col-sm-offset-3 col-sm-9">
+              <?php if (isset($_GET['edit'])) { ?>
+                <input type="hidden" name="oldpid" value="<?php echo $editrow['fld_product_id']; ?>">
+                <button class="btn btn-default" type="submit" name="update"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Update</button>
+              <?php } else { ?>
+                <button class="btn btn-default" type="submit" name="create"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create</button>
+              <?php } ?>
+              <button class="btn btn-default" type="reset"><span class="glyphicon glyphicon-erase" aria-hidden="true"></span> Clear</button>
+            </div>
           </div>
-        </div>
-        <div class="form-group">
-          <label for="productimage" class="col-sm-3 control-label">Product Image</label>
-          <div class="col-sm-9">
-            <input name="productimage" type="file" class="form-control" id="productimage" accept=".jpeg, .jpg, .png" required>
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="col-sm-offset-3 col-sm-9">
-            <?php if (isset($_GET['edit'])) { ?>
-              <input type="hidden" name="oldpid" value="<?php echo $editrow['fld_product_id']; ?>">
-              <button class="btn btn-default" type="submit" name="update"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Update</button>
-            <?php } else { ?>
-              <button class="btn btn-default" type="submit" name="create"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create</button>
-            <?php } ?>
-            <button class="btn btn-default" type="reset"><span class="glyphicon glyphicon-erase" aria-hidden="true"></span> Clear</button>
-          </div>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
-      <div class="page-header">
-        <h2>Products List</h2>
+        </form>
       </div>
-      <table class="table table-striped table-bordered" id="products" style="width:100%">
-        <thead>
-          <tr>
-            <th>Product ID</th>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Brand</th>
-            <th>Category</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <?php
-            // Read
-          $per_page = 5;
-          if (isset($_GET["page"]))
-            $page = $_GET["page"];
-          else
-            $page = 1;
-          $start_from = ($page-1) * $per_page;
-          try {
-            $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $stmt = $conn->prepare("select * from tbl_products_a192212_pt2");
-            $stmt->execute();
-            $result = $stmt->fetchAll();
-          }
-          catch(PDOException $e){
-            echo "Error: " . $e->getMessage();
-          }
-          foreach($result as $readrow) {
-            ?>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+        <div class="page-header">
+          <h2>Products List</h2>
+        </div>
+        <table class="table table-striped table-bordered" id="products" style="width:100%">
+          <thead>
             <tr>
-              <td><?php echo $readrow['fld_product_id']; ?></td>
-              <td><?php echo $readrow['fld_product_name']; ?></td>
-              <td><?php echo $readrow['fld_price']; ?></td>
-              <td><?php echo $readrow['fld_brand']; ?></td>
-              <td><?php echo $readrow['fld_category']; ?></td>
-              <td>
-                <a href="javascript:void(0)" data-href="products_details.php?pid=<?php echo $readrow['fld_product_id']; ?>" data-keyboard="true" class="btn btn-warning btn-xs openPopup" role="button">Details</a>
-                <a href="products.php?edit=<?php echo $readrow['fld_product_id']; ?>" class="btn btn-success btn-xs" role="button"> Edit </a>
-                <a href="products.php?delete=<?php echo $readrow['fld_product_id']; ?>" onclick="return confirm('Are you sure to delete?');" class="btn btn-danger btn-xs" role="button">Delete</a>
-              </td>
+              <th>Product ID</th>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Brand</th>
+              <th>Category</th>
+              <th></th>
             </tr>
+          </thead>
+          <tbody>
             <?php
-          }
-          $conn = null;
-          ?>
-        </tbody>
-      </table>
+            // Read
+            $per_page = 5;
+            if (isset($_GET["page"]))
+              $page = $_GET["page"];
+            else
+              $page = 1;
+            $start_from = ($page-1) * $per_page;
+            try {
+              $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+              $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+              $stmt = $conn->prepare("select * from tbl_products_a192212_pt2");
+              $stmt->execute();
+              $result = $stmt->fetchAll();
+            }
+            catch(PDOException $e){
+              echo "Error: " . $e->getMessage();
+            }
+            foreach($result as $readrow) {
+              ?>
+              <tr>
+                <td><?php echo $readrow['fld_product_id']; ?></td>
+                <td><?php echo $readrow['fld_product_name']; ?></td>
+                <td><?php echo $readrow['fld_price']; ?></td>
+                <td><?php echo $readrow['fld_brand']; ?></td>
+                <td><?php echo $readrow['fld_category']; ?></td>
+                <td>
+                  <a href="javascript:void(0)" data-href="products_details.php?pid=<?php echo $readrow['fld_product_id']; ?>" data-keyboard="true" class="btn btn-warning btn-xs openPopup" role="button">Details</a>
+                  <a href="products.php?edit=<?php echo $readrow['fld_product_id']; ?>" class="btn btn-success btn-xs" role="button"> Edit </a>
+                  <a href="products.php?delete=<?php echo $readrow['fld_product_id']; ?>" onclick="return confirm('Are you sure to delete?');" class="btn btn-danger btn-xs" role="button">Delete</a>
+                </td>
+              </tr>
+              <?php
+            }
+            $conn = null;
+            ?>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 
@@ -198,31 +199,31 @@ include_once 'products_crud.php';
     });
 
     $(document).ready(function() {
-        /**
-        * 'order' - set column "Name" is sorted ascendingly on load
-        * 'columnDefs' - set "Price" column not part of the searching function
-        * 'lengthMenu' - set entries per page options
-        * 'layout>top2End>buttons' - add export as excel button and exclude last column
-        */
-        $('#products').DataTable({
-          order: [[1, 'asc']],
-          columnDefs: [{
-            'searchable': false, 
-            'targets': [2] 
-          }],
-          lengthMenu: [5, 10, 20, 30, { label: 'All', value: -1 }],
-          layout: {
-            top2End: {
-              buttons: [{
-                extend: 'excelHtml5',
-                exportOptions: {
-                  columns: [0, 1, 2, 3, 4]
-                }
-              }]
-            }
+      /**
+      * 'order' - set column "Name" is sorted ascendingly on load
+      * 'columnDefs' - set "Price" column not part of the searching function
+      * 'lengthMenu' - set entries per page options
+      * 'layout>top2End>buttons' - add export as excel button and exclude last column
+      */
+      $('#products').DataTable({
+        order: [[1, 'asc']],
+        columnDefs: [{
+          'searchable': false, 
+          'targets': [2] 
+        }],
+        lengthMenu: [5, 10, 20, 30, { label: 'All', value: -1 }],
+        layout: {
+          top2End: {
+            buttons: [{
+              extend: 'excelHtml5',
+              exportOptions: {
+                columns: [0, 1, 2, 3, 4]
+              }
+            }]
           }
-        });
+        }
       });
-    </script>
-  </body>
+    });
+  </script>
+</body>
 </html>
