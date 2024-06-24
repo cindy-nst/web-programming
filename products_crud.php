@@ -18,6 +18,15 @@ catch(PDOException $e){
 if (isset($_POST['create'])) {
 
   try {
+    $pid = $_POST['pid'];
+    $name = $_POST['name'];
+    $price = $_POST['price'];
+    $brand =  $_POST['brand'];
+    $category = $_POST['category'];
+    $quantity = $_POST['quantity'];
+    $expirydate = $_POST['expirydate'];
+    $temp = explode(".", $_FILES["pimage"]["name"]);
+    $pimage = $pid . '.' . end($temp);
 
     $stmt = $conn->prepare("INSERT INTO tbl_products_a192212_pt2(fld_product_id,
       fld_product_name, fld_price, fld_brand, fld_category,
@@ -33,20 +42,9 @@ if (isset($_POST['create'])) {
     $stmt->bindParam(':expirydate', $expirydate, PDO::PARAM_STR);
     $stmt->bindParam(':pimage', $pimage, PDO::PARAM_STR);
 
-    $pid = $_POST['pid'];
-    $name = $_POST['name'];
-    $price = $_POST['price'];
-    $brand =  $_POST['brand'];
-    $category = $_POST['category'];
-    $quantity = $_POST['quantity'];
-    $expirydate = $_POST['expirydate'];
-    $pimage = $_POST['pimage'];
-
-    $temp = explode(".", $_FILES["pimage"]["name"]);
-    $pimage = $pid . '.' . end($temp);
-    move_uploaded_file($_FILES["pimage"]["tmp_name"], "products/" . $pimage);
-
     $stmt->execute();
+    
+    move_uploaded_file($_FILES["pimage"]["tmp_name"], "products/" . $pimage);
   }
   catch(PDOException $e)
   {
@@ -58,22 +56,6 @@ if (isset($_POST['create'])) {
 if (isset($_POST['update'])) {
 
   try {
-
-    $stmt = $conn->prepare("UPDATE tbl_products_a192212_pt2 SET fld_product_id = :pid,
-      fld_product_name = :name, fld_price = :price, fld_brand = :brand,
-      fld_category = :category, fld_quantity = :quantity, fld_expiry_date = :expirydate
-      WHERE fld_product_id = :oldpid");
-
-    $stmt->bindParam(':pid', $pid, PDO::PARAM_STR);
-    $stmt->bindParam(':name', $name, PDO::PARAM_STR);
-    $stmt->bindParam(':price', $price, PDO::PARAM_INT);
-    $stmt->bindParam(':brand', $brand, PDO::PARAM_STR);
-    $stmt->bindParam(':category', $category, PDO::PARAM_STR);
-    $stmt->bindParam(':quantity', $quantity, PDO::PARAM_INT);
-    $stmt->bindParam(':expirydate', $expirydate, PDO::PARAM_STR);
-    $stmt->bindParam(':oldpid', $oldpid, PDO::PARAM_STR);
-    $stmt->bindParam(':pimage', $pimage, PDO::PARAM_STR);
-
     $pid = $_POST['pid'];
     $name = $_POST['name'];
     $price = $_POST['price'];
@@ -82,17 +64,37 @@ if (isset($_POST['update'])) {
     $quantity = $_POST['quantity'];
     $expirydate = $_POST['expirydate'];
     $oldpid = $_POST['oldpid'];
-    $pimage = $_POST['pimage'];
 
-    if (!empty($pimage)) {
-      unlink("products/" . $oldpid . "png");
-      
+    if (!empty($_FILES["pimage"]["name"])) { 
       $temp = explode(".", $_FILES["pimage"]["name"]);
       $pimage = $pid . '.' . end($temp);
-      move_uploaded_file($_FILES["pimage"]["tmp_name"], "products/" . $pimage);
+      echo $pimage;
+
+      $stmt = $conn->prepare("UPDATE tbl_products_a192212_pt2 SET 
+        fld_product_name = :name, fld_price = :price, fld_brand = :brand,
+        fld_category = :category, fld_quantity = :quantity, fld_expiry_date = :expirydate, fld_image = :pimage 
+        WHERE fld_product_id = :oldpid");
+
+      $stmt->bindParam(':pimage', $pimage, PDO::PARAM_STR);
+    }else{
+      $stmt = $conn->prepare("UPDATE tbl_products_a192212_pt2 SET 
+        fld_product_name = :name, fld_price = :price, fld_brand = :brand,
+        fld_category = :category, fld_quantity = :quantity, fld_expiry_date = :expirydate 
+        WHERE fld_product_id = :oldpid");
     }
     
+    $stmt->bindParam(':name', $name, PDO::PARAM_STR);
+    $stmt->bindParam(':price', $price, PDO::PARAM_INT);
+    $stmt->bindParam(':brand', $brand, PDO::PARAM_STR);
+    $stmt->bindParam(':category', $category, PDO::PARAM_STR);
+    $stmt->bindParam(':quantity', $quantity, PDO::PARAM_INT);
+    $stmt->bindParam(':expirydate', $expirydate, PDO::PARAM_STR);
+    $stmt->bindParam(':oldpid', $oldpid, PDO::PARAM_STR);
+
     $stmt->execute();
+    
+    unlink("products/" . $oldpid . "png");
+    move_uploaded_file($_FILES["pimage"]["tmp_name"], "products/" . $pimage);
 
     header("Location: products.php");
   }
