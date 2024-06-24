@@ -149,7 +149,7 @@ include_once 'products_crud.php';
                 <td><?php echo $readrow['fld_brand']; ?></td>
                 <td><?php echo $readrow['fld_category']; ?></td>
                 <td>
-                  <a href="javascript:void(0)" data-href="products_details.php?pid=<?php echo $readrow['fld_product_id']; ?>" data-keyboard="true" class="btn btn-warning btn-xs openPopup" role="button">Details</a>
+                  <a href="javascript:void(0)" data-href="products_details.php?pid=<?php echo $readrow['fld_product_id']; ?>" class="btn btn-warning btn-xs openPopup" role="button">Details</a>
                   <a href="products.php?edit=<?php echo $readrow['fld_product_id']; ?>" class="btn btn-success btn-xs" role="button"> Edit </a>
                   <a href="products.php?delete=<?php echo $readrow['fld_product_id']; ?>" onclick="return confirm('Are you sure to delete?');" class="btn btn-danger btn-xs" role="button">Delete</a>
                 </td>
@@ -165,7 +165,7 @@ include_once 'products_crud.php';
   </div>
 
   <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog" tabindex='-1'>
+  <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
       <!-- Modal content-->
       <div class="modal-content">
