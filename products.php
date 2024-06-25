@@ -20,12 +20,23 @@ include_once 'products_crud.php';
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
+  <?php
+  // We need to use sessions, so you should always start sessions using the below code.
+  session_start();
+  // If the user is not logged in redirect to the login page...
+  if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true && !isset($_SESSION["role"])) {
+    header('Location: login.php');
+    exit;
+  } else {
+    $role = $_SESSION['role'];
+  }
+  ?>
 </head>
 <body>
   <?php include_once 'nav_bar.php'; ?>
 
   <div class="container-fluid">
-    <div class="row">
+    <div class="row" <?php if ($role === 'NON-ADMIN'){?>style="display:none;"<?php } ?>>
       <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
         <div class="page-header">
           <h2>Create New Product</h2>
@@ -150,8 +161,10 @@ include_once 'products_crud.php';
                 <td><?php echo $readrow['fld_category']; ?></td>
                 <td>
                   <a href="javascript:void(0)" data-href="products_details.php?pid=<?php echo $readrow['fld_product_id']; ?>" class="btn btn-warning btn-xs openPopup" role="button">Details</a>
-                  <a href="products.php?edit=<?php echo $readrow['fld_product_id']; ?>" class="btn btn-success btn-xs" role="button"> Edit </a>
-                  <a href="products.php?delete=<?php echo $readrow['fld_product_id']; ?>" onclick="return confirm('Are you sure to delete?');" class="btn btn-danger btn-xs" role="button">Delete</a>
+                  <?php if ($role === 'ADMIN') {?>
+                    <a href="products.php?edit=<?php echo $readrow['fld_product_id']; ?>" class="btn btn-success btn-xs" role="button"> Edit </a>
+                    <a href="products.php?delete=<?php echo $readrow['fld_product_id']; ?>" onclick="return confirm('Are you sure to delete?');" class="btn btn-danger btn-xs" role="button">Delete</a>
+                  <?php }?>
                 </td>
               </tr>
               <?php
