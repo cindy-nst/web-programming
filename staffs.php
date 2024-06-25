@@ -65,9 +65,39 @@ include_once 'staffs_crud.php';
             </div>
           </div>
           <div class="form-group">
-            <label for="productname" class="col-sm-3 control-label">Position</label>
+            <label for="staffposition" class="col-sm-3 control-label">Position</label>
             <div class="col-sm-9">
-              <input name="position" type="text" class="form-control id="staffposition" placeholder="Staff Position" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_position']; ?>" required> 
+              <input name="position" type="text" class="form-control" id="staffposition" placeholder="Staff Position" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_position']; ?>" required> 
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="staffpassword" class="col-sm-3 control-label">Password</label>
+            <div class="col-sm-9">
+              <input name="password" type="password" class="form-control" id="staffpassword" placeholder="Password" required> 
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="staffconfirmpassword" class="col-sm-3 control-label">Retype password</label>
+            <div class="col-sm-9">
+              <input name="confirmpassword" type="password" class="form-control" id="staffconfirmpassword" placeholder="Confirm Password" required> 
+              <span id="message"></span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="staffrole" class="col-sm-3 control-label">Role</label>
+            <div class="col-sm-9">
+              <select name="role" class="form-control" id="staffposition" required>
+                <?php
+                $roles = array("ADMIN", "NON-ADMIN");
+                foreach($roles as $x){
+                  $role = $x;
+                  ?>
+                  <option value="<?php echo $role; ?>" <?php if(isset($_GET['edit'])) if($editrow['fld_role']=="<?php echo $role; ?>") echo "selected"; ?>><?php echo $role; ?></option>
+                  <?php
+                }
+                $conn = null;
+                ?>
+              </select>
             </div>
           </div>
           <div class="form-group">
@@ -76,7 +106,7 @@ include_once 'staffs_crud.php';
                 <input type="hidden" name="oldsid" value="<?php echo $editrow['fld_staff_id']; ?>">
                 <button class="btn btn-default" type="submit" name="update"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Update</button>
               <?php } else { ?>
-                <button class="btn btn-default" type="submit" name="create"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create</button>
+                <button class="btn btn-default" type="submit" id="createbtn" name="create"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create</button>
               <?php } ?>
               <button class="btn btn-default" type="reset"><span class="glyphicon glyphicon-erase" aria-hidden="true"></span> Clear</button>
             </div>
@@ -183,6 +213,21 @@ include_once 'staffs_crud.php';
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+      $('#staffpassword, #staffconfirmpassword').on('keyup', function () {
+        if ($('#staffpassword').val() == $('#staffconfirmpassword').val()) {
+          $('#message').html('Match').css('color', 'green');
+        } else 
+        $('#message').html('Not Match').css('color', 'red');
+      });
+
+      $("#createbtn").click(function(event) { 
+        if ($('#staffpassword').val() == $('#staffconfirmpassword').val()) {
+          $('#message').html('Match').css('color', 'green');
+        } else 
+        $('#message').html('Not Match').css('color', 'red');
+      }); 
+    </script>
 
   </body>
   </html>
