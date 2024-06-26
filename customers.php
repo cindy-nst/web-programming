@@ -42,19 +42,19 @@ include_once 'customers_crud.php';
 					<div class="form-group">
 						<label for="customerid" class="col-sm-3 control-label">Customer ID</label>
 						<div class="col-sm-9">
-							<input name="cid" type="text" class="form-control id="customerid" placeholder="Customer ID" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_customer_id']; ?>" required>
+							<input name="cid" type="text" class="form-control" id="customerid" placeholder="Customer ID" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_customer_id']; ?>" required>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="customername" class="col-sm-3 control-label">Customer Name</label>
 						<div class="col-sm-9">
-							<input name="cname" type="text" class="form-control id="customername" placeholder="Customer Name" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_customer_name']; ?>" required>
+							<input name="cname" type="text" class="form-control" id="customername" placeholder="Customer Name" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_customer_name']; ?>" required>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="customerage" class="col-sm-3 control-label">Age</label>
 						<div class="col-sm-9">
-							<td><input type="number" name="age" min="0" max="100" step="1" class="form-control id="customerage" placeholder="Customer Age" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_age']; ?>" required></td>
+							<td><input type="number" name="age" min="0" max="100" step="1" class="form-control" id="customerage" placeholder="Customer Age" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_age']; ?>" required></td>
 						</div>
 					</div> 
 					<div class="form-group">
