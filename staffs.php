@@ -55,7 +55,7 @@ include_once 'staffs_crud.php';
         <div class="form-group">
           <label for="staffage" class="col-sm-3 control-label">Age</label>
           <div class="col-sm-9">
-            <td><input type="number" name="age" min="0" max="100" step="1" class="form-control id="staffage" placeholder="Staff Age" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_age']; ?>" required></td>
+            <td><input type="number" name="age" min="0" max="100" step="1" class="form-control" id="staffage" placeholder="Staff Age" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_age']; ?>" required></td>
           </div>
         </div>
         <div class="form-group">
@@ -79,13 +79,13 @@ include_once 'staffs_crud.php';
             <input name="position" type="text" class="form-control" id="staffposition" placeholder="Staff Position" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_position']; ?>" required> 
           </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" style="<?php if(isset($_GET['edit'])) echo "display: none;" ?>">
           <label for="staffpassword" class="col-sm-3 control-label">Password</label>
           <div class="col-sm-9">
             <input name="pwd" type="password" class="form-control" id="staffpassword" placeholder="Password" required> 
           </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" style="<?php if(isset($_GET['edit'])) echo "display: none;" ?>">
           <label for="staffconfirmpassword" class="col-sm-3 control-label">Confirm password</label>
           <div class="col-sm-9">
             <input name="confirmpwd" type="password" class="form-control" id="staffconfirmpassword" placeholder="Confirm Password" required> 
@@ -95,7 +95,7 @@ include_once 'staffs_crud.php';
         <div class="form-group">
           <label for="staffrole" class="col-sm-3 control-label">Role</label>
           <div class="col-sm-9">
-            <select name="role" class="form-control" id="staffposition" required>
+            <select name="role" class="form-control" id="staffrole" required>
               <?php
               $roles = array("ADMIN", "NON-ADMIN");
               foreach($roles as $x){
@@ -222,6 +222,12 @@ include_once 'staffs_crud.php';
   <!-- Include all compiled plugins (below), or include individual files as needed -->
   <script src="js/bootstrap.min.js"></script>
   <script type="text/javascript">
+    if (!$('#staffpassword').val() && !$('#staffconfirmpassword').val() || $('#staffpassword').val() != $('#staffconfirmpassword').val()) {
+      $("#createbtn").prop('disabled', true);
+    } else {
+      $("#createbtn").prop('disabled', false);
+    }
+
     $('#staffpassword, #staffconfirmpassword').on('keyup', function () {
       if (!$('#staffpassword').val() && !$('#staffconfirmpassword').val()) {
         $('#pwdmessage').hide();
@@ -232,15 +238,7 @@ include_once 'staffs_crud.php';
       }
     });
 
-    $("#createbtn").click(function() { 
-      if (!$('#staffpassword').val() && !$('#staffconfirmpassword').val()) {
-        $('#pwdmessage').hide();
-      } else if ($('#staffpassword').val() == $('#staffconfirmpassword').val()) {
-        $('#pwdmessage').html('Password match').css('color', 'green');
-      } else {
-        $('#pwdmessage').html('Password does not match').css('color', 'red');
-      }
-    }); 
+
   </script>
 
 </body>
