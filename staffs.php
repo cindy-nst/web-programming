@@ -165,7 +165,6 @@ include_once 'staffs_crud.php';
             <td><?php echo $readrow['fld_age']; ?></td>
             <td><?php echo $readrow['fld_position']; ?></td>
             <td>
-              <a href="staffs.php?pid=<?php echo $readrow['fld_staff_id']; ?>" class="btn btn-warning btn-xs" role="button">Details</a>
               <a href="staffs.php?edit=<?php echo $readrow['fld_staff_id']; ?>" class="btn btn-success btn-xs" role="button"> Edit </a>
               <a href="staffs.php?delete=<?php echo $readrow['fld_staff_id']; ?>" onclick="return confirm('Are you sure to delete?');" class="btn btn-danger btn-xs" role="button">Delete</a>
             </td>
