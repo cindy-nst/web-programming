@@ -72,10 +72,10 @@ $conn = null;
 					</div>
 					<div class="panel-body">
 						<p>
-							Address 1 <br>
-							Address 2 <br>
-							Postcode City <br>
-							State <br>
+							123，Jalan Indah <br>
+							Bandar Damai <br>
+							43600 Bangi <br>
+							Selangor <br>
 						</p>
 					</div>
 				</div>
@@ -87,10 +87,10 @@ $conn = null;
 					</div>
 					<div class="panel-body">
 						<p>
-							Address 1 <br>
-							Address 2 <br>
-							Postcode City <br>
-							State <br>
+							456, Jalan Setia Indah <br>
+							Bandar Putra <br>
+							81000 Kulai <br>
+							Johor <br>
 						</p>
 					</div>
 				</div>
