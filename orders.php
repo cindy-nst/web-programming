@@ -44,13 +44,13 @@ include_once 'orders_crud.php';
        <div class="form-group">
         <label for="orderid" class="col-sm-3 control-label">Order ID</label>
         <div class="col-sm-9">
-          <input name="oid" type="text" class="form-control" id="orderid" placeholder="Order ID" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_order_id']; ?>" required>
+          <input name="oid" type="text" class="form-control" id="orderid" placeholder="Order ID" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_order_id']; ?>" disabled>
         </div>
       </div>
       <div class="form-group">
         <label for="orderdate" class="col-sm-3 control-label">Order Date</label>
         <div class="col-sm-9">
-          <input name="name" type="text" class="form-control" id="orderdate" placeholder="Order Date" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_order_date']; ?>" required>
+          <input name="name" type="text" class="form-control" id="orderdate" placeholder="Order Date" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_order_date']; ?>" disabled>
         </div>
       </div>
       <div class="form-group">

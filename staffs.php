@@ -136,6 +136,7 @@ include_once 'staffs_crud.php';
           <td>Gender</td>
           <td>Age</td>
           <td>Position</td>
+          <td>Role</td>
           <td></td>
         </tr>
         <?php
@@ -164,6 +165,7 @@ include_once 'staffs_crud.php';
             <td><?php echo $readrow['fld_gender']; ?></td>
             <td><?php echo $readrow['fld_age']; ?></td>
             <td><?php echo $readrow['fld_position']; ?></td>
+            <td><?php echo $readrow['fld_role']; ?></td>
             <td>
               <a href="staffs.php?edit=<?php echo $readrow['fld_staff_id']; ?>" class="btn btn-success btn-xs" role="button"> Edit </a>
               <a href="staffs.php?delete=<?php echo $readrow['fld_staff_id']; ?>" onclick="return confirm('Are you sure to delete?');" class="btn btn-danger btn-xs" role="button">Delete</a>
@@ -222,22 +224,19 @@ include_once 'staffs_crud.php';
   <!-- Include all compiled plugins (below), or include individual files as needed -->
   <script src="js/bootstrap.min.js"></script>
   <script type="text/javascript">
-    if (!$('#staffpassword').val() && !$('#staffconfirmpassword').val() || $('#staffpassword').val() != $('#staffconfirmpassword').val()) {
-      $("#createbtn").prop('disabled', true);
-    } else {
-      $("#createbtn").prop('disabled', false);
-    }
 
     $('#staffpassword, #staffconfirmpassword').on('keyup', function () {
       if (!$('#staffpassword').val() && !$('#staffconfirmpassword').val()) {
         $('#pwdmessage').hide();
+        $("#createbtn").prop('disabled', true);
       } else if ($('#staffpassword').val() == $('#staffconfirmpassword').val()) {
         $('#pwdmessage').html('Password match').css('color', 'green');
+        $("#createbtn").prop('disabled', false);
       } else {
         $('#pwdmessage').html('Password does not match').css('color', 'red');
+        $("#createbtn").prop('disabled', true);
       }
     });
-
 
   </script>
 
