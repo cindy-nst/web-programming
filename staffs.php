@@ -89,7 +89,7 @@ include_once 'staffs_crud.php';
           <label for="staffconfirmpassword" class="col-sm-3 control-label">Retype password</label>
           <div class="col-sm-9">
             <input name="confirmpwd" type="password" class="form-control" id="staffconfirmpassword" placeholder="Confirm Password" required> 
-            <span id="message"></span>
+            <span id="pwdmessage"></span>
           </div>
         </div>
         <div class="form-group">
@@ -224,17 +224,22 @@ include_once 'staffs_crud.php';
   <script src="js/bootstrap.min.js"></script>
   <script type="text/javascript">
     $('#staffpassword, #staffconfirmpassword').on('keyup', function () {
-      if ($('#staffpassword').val() == $('#staffconfirmpassword').val()) {
-        $('#message').html('Password match').css('color', 'green');
-      } else 
-      $('#message').html('Password does not match').css('color', 'red');
+      if (!$('#staffpassword').val() && !$('#staffconfirmpassword').val()) {
+        $('#pwdmessage').hide();
+      } else if ($('#staffpassword').val() == $('#staffconfirmpassword').val()) {
+        $('#pwdmessage').html('Password match').css('color', 'green');
+      } else {
+        $('#pwdmessage').html('Password does not match').css('color', 'red');
+      }
     });
 
-    $("#createbtn").click(function(event) { 
-      if ($('#staffpassword').val() == $('#staffconfirmpassword').val()) {
-        $('#message').html('Password match').css('color', 'green');
+    $("#createbtn").click(function() { 
+      if (!$('#staffpassword').val() && !$('#staffconfirmpassword').val()) {
+        $('#pwdmessage').hide();
+      } else if ($('#staffpassword').val() == $('#staffconfirmpassword').val()) {
+        $('#pwdmessage').html('Password match').css('color', 'green');
       } else {
-        $('#message').html('Password does not match').css('color', 'red');
+        $('#pwdmessage').html('Password does not match').css('color', 'red');
       }
     }); 
   </script>
