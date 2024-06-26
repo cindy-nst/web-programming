@@ -86,7 +86,7 @@ include_once 'staffs_crud.php';
           </div>
         </div>
         <div class="form-group">
-          <label for="staffconfirmpassword" class="col-sm-3 control-label">Retype password</label>
+          <label for="staffconfirmpassword" class="col-sm-3 control-label">Confirm password</label>
           <div class="col-sm-9">
             <input name="confirmpwd" type="password" class="form-control" id="staffconfirmpassword" placeholder="Confirm Password" required> 
             <span id="pwdmessage"></span>
