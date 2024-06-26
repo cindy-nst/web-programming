@@ -54,7 +54,7 @@ include_once 'customers_crud.php';
 					<div class="form-group">
 						<label for="customerage" class="col-sm-3 control-label">Age</label>
 						<div class="col-sm-9">
-							<td><input type="number" name="age" min="0" max="100" step="1" class="form-control" id="customerage" placeholder="Customer Age" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_age']; ?>" required></td>
+							<input type="number" name="age" min="0" max="100" step="1" class="form-control" id="customerage" placeholder="Customer Age" value="<?php if(isset($_GET['edit'])) echo $editrow['fld_age']; ?>" required>
 						</div>
 					</div> 
 					<div class="form-group">
