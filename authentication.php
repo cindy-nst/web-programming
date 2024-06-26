@@ -18,7 +18,8 @@ try {
 		$row = $stmt->fetch(PDO::FETCH_ASSOC);
 
 		$hashed_password = $row['fld_password'];
-		if(password_verify($password, $hashed_password)){
+		if(password_verify($password, $hashed_password)) {
+			// We need to use sessions, so you should always start sessions using the below code.
 			session_start();
 
 			// Create sessions, so we know the user is logged in, they basically act like cookies but remember the data on the server.
@@ -31,12 +32,18 @@ try {
 			$_SESSION['role'] = $row['fld_role'];			
 
 			// Redirect user to home page
-			header('location: index.php');
+			header('Location: index.php');
 		} else {
-			header('location: login.php');
+			session_start();
+			session_regenerate_id();
+			$_SESSION['loggedin'] = false;
+			header('Location: login.php');
 		}
 	} else {
-		header('location: login.php');
+		session_start();
+		session_regenerate_id();
+		$_SESSION['loggedin'] = false;
+		header('Location: login.php');
 	}
 }
 catch(PDOException $e)

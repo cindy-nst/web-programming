@@ -18,6 +18,17 @@
 	<![endif]-->
 	<style type="text/css">
 	</style>
+	<?php
+	session_start();
+
+	if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === false) {
+		$message = "Incorrect staff id and/or password!";
+		session_unset();
+	} else {
+		$message = "";
+		session_unset();
+	}
+	?>
 </head>
 <body>
 	<div class="container">
@@ -28,6 +39,7 @@
 					<form class="form-signin" action="authentication.php" method="post">
 						<input type="text" class="form-control" name="staffid" id="staffid" placeholder="Staff ID" required autofocus>
 						<input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
+						<span style="color: red;"><?php echo $message; ?></span>
 						<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
 					</form>
 				</div>
