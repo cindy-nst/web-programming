@@ -82,13 +82,13 @@ include_once 'staffs_crud.php';
         <div class="form-group">
           <label for="staffpassword" class="col-sm-3 control-label">Password</label>
           <div class="col-sm-9">
-            <input name="password" type="password" class="form-control" id="staffpassword" placeholder="Password" required> 
+            <input name="pwd" type="password" class="form-control" id="staffpassword" placeholder="Password" required> 
           </div>
         </div>
         <div class="form-group">
           <label for="staffconfirmpassword" class="col-sm-3 control-label">Retype password</label>
           <div class="col-sm-9">
-            <input name="confirmpassword" type="password" class="form-control" id="staffconfirmpassword" placeholder="Confirm Password" required> 
+            <input name="confirmpwd" type="password" class="form-control" id="staffconfirmpassword" placeholder="Confirm Password" required> 
             <span id="message"></span>
           </div>
         </div>
@@ -225,16 +225,17 @@ include_once 'staffs_crud.php';
   <script type="text/javascript">
     $('#staffpassword, #staffconfirmpassword').on('keyup', function () {
       if ($('#staffpassword').val() == $('#staffconfirmpassword').val()) {
-        $('#message').html('Match').css('color', 'green');
+        $('#message').html('Password match').css('color', 'green');
       } else 
-      $('#message').html('Not Match').css('color', 'red');
+      $('#message').html('Password does not match').css('color', 'red');
     });
 
     $("#createbtn").click(function(event) { 
       if ($('#staffpassword').val() == $('#staffconfirmpassword').val()) {
-        $('#message').html('Match').css('color', 'green');
-      } else 
-      $('#message').html('Not Match').css('color', 'red');
+        $('#message').html('Password match').css('color', 'green');
+      } else {
+        $('#message').html('Password does not match').css('color', 'red');
+      }
     }); 
   </script>
 

@@ -14,21 +14,21 @@ if (isset($_POST['create'])) {
     $gender = $_POST['gender'];
     $age =  $_POST['age'];
     $position = $_POST['position'];
-    $password = trim($_POST['password']);
+    $pwd = trim($_POST['pwd']);
     $role = $_POST['role'];
 
-    $hashedpassword = password_hash($password, PASSWORD_DEFAULT);
+    $hashedpassword = password_hash($pwd, PASSWORD_DEFAULT);
 
     $stmt = $conn->prepare("INSERT INTO tbl_staffs_a192212_pt2(fld_staff_id, fld_staff_name, fld_gender,
       fld_age, fld_position, fld_password, fld_role) VALUES(:sid, :sname, :gender, :age,
-      :position, :password, :role)");
+      :position, :pwd, :role)");
 
     $stmt->bindParam(':sid', $sid, PDO::PARAM_STR);
     $stmt->bindParam(':sname', $sname, PDO::PARAM_STR);
     $stmt->bindParam(':gender', $gender, PDO::PARAM_STR);
     $stmt->bindParam(':age', $age, PDO::PARAM_INT);
     $stmt->bindParam(':position', $position, PDO::PARAM_STR);
-    $stmt->bindParam(':password', $hashedpassword, PDO::PARAM_STR);
+    $stmt->bindParam(':pwd', $hashedpassword, PDO::PARAM_STR);
     $stmt->bindParam(':role', $role, PDO::PARAM_STR);
 
 
