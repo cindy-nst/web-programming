@@ -126,9 +126,9 @@ include_once 'customers_crud.php';
 							<td><?php echo $readrow['fld_age']; ?></td>
 							<td><?php echo $readrow['fld_gender']; ?></td>
 							<td>
-								<a href="customer.php?pid=<?php echo $readrow['fld_customer_id']; ?>" class="btn btn-warning btn-xs" role="button">Details</a>
-								<a href="customer.php?edit=<?php echo $readrow['fld_customer_id']; ?>" class="btn btn-success btn-xs" role="button"> Edit </a>
-								<a href="customer.php?delete=<?php echo $readrow['fld_customer_id']; ?>" onclick="return confirm('Are you sure to delete?');" class="btn btn-danger btn-xs" role="button">Delete</a>
+								<a href="customers.php?pid=<?php echo $readrow['fld_customer_id']; ?>" class="btn btn-warning btn-xs" role="button">Details</a>
+								<a href="customers.php?edit=<?php echo $readrow['fld_customer_id']; ?>" class="btn btn-success btn-xs" role="button"> Edit </a>
+								<a href="customers.php?delete=<?php echo $readrow['fld_customer_id']; ?>" onclick="return confirm('Are you sure to delete?');" class="btn btn-danger btn-xs" role="button">Delete</a>
 							</td>
 						</tr>
 						<?php
@@ -159,19 +159,19 @@ include_once 'customers_crud.php';
 						<?php if ($page==1) { ?>
 							<li class="disabled"><span aria-hidden="true">«</span></li>
 						<?php } else { ?>
-							<li><a href="customer.php?page=<?php echo $page-1 ?>" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
+							<li><a href="customers.php?page=<?php echo $page-1 ?>" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
 							<?php
 						}
 						for ($i=1; $i<=$total_pages; $i++)
 							if ($i == $page)
-								echo "<li class=\"active\"><a href=\"customer.php?page=$i\">$i</a></li>";
+								echo "<li class=\"active\"><a href=\"customers.php?page=$i\">$i</a></li>";
 							else
-								echo "<li><a href=\"customer.php?page=$i\">$i</a></li>";
+								echo "<li><a href=\"customers.php?page=$i\">$i</a></li>";
 							?>
 							<?php if ($page==$total_pages) { ?>
 								<li class="disabled"><span aria-hidden="true">»</span></li>
 							<?php } else { ?>
-								<li><a href="customer.php?page=<?php echo $page+1 ?>" aria-label="Previous"><span aria-hidden="true">»</span></a></li>
+								<li><a href="customers.php?page=<?php echo $page+1 ?>" aria-label="Previous"><span aria-hidden="true">»</span></a></li>
 							<?php } ?>
 						</ul>
 					</nav>
